@@ -409,6 +409,8 @@ def svn(self, xml_parent, data):
       :Repo: * **url** (`str`) -- URL for the repository
              * **basedir** (`str`) -- Location relative to the workspace
                                       root to checkout to (default '.')
+             * **credentials-id** (`str) -- ID of credentials to use to connect
+                                            (optional)
 
     :workspaceupdater values:
              :wipeworkspace: - deletes the workspace before checking out
@@ -434,6 +436,8 @@ def svn(self, xml_parent, data):
                                     'hudson.scm.SubversionSCM_-ModuleLocation')
             XML.SubElement(module, 'remote').text = repo['url']
             XML.SubElement(module, 'local').text = repo.get('basedir', '.')
+            XML.SubElement(module, 'credentialsId').text = repo.get(
+                           'credentials-id', '.')
     elif 'url' in data:
         module = XML.SubElement(locations,
                                 'hudson.scm.SubversionSCM_-ModuleLocation')
